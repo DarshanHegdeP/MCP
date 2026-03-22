@@ -88,7 +88,7 @@ graph TD
         
         subgraph AgentBoxServer ["🟪 MCPAgent"]
             AgentS["🤖 MCPAgent<br/>(Decision Maker)"]:::purple
-            LLM S["🧠 Groq LLM"]:::purple
+            LLMS["🧠 Groq LLM"]:::purple
             ClientS["🔌 MCPClient<br/>(Tool Connector)"]:::yellow
             AgentS --- LLMS
             AgentS --- ClientS
