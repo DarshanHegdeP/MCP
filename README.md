@@ -1,7 +1,5 @@
 # 🚀 MCP Agent & Server Ecosystem
 
-![MCP Agent Logo](assets/logo.png)
-
 A state-of-the-art demonstration of the **Model Context Protocol (MCP)**, featuring autonomous agents, browser automation, and multi-server orchestration. This ecosystem leverage's Groq's high-performance inference to provide a seamless agentic experience.
 
 ---
@@ -12,17 +10,17 @@ The system is designed as a modular ecosystem where a central agent coordinates 
 
 ```mermaid
 graph TD
-    User[👤 User] -->|Commands| App[🖥️ app.py CLI]
-    App -->|Manages| Agent[🤖 MCPAgent]
-    Agent -->|Reasoning| LLM[🧠 Groq Llama-3.3]
-    Agent -->|Tool Execution| Client[🔌 MCPClient]
-    Client -->|Loads Servers| Config[🌐 browser_mcp.json]
+    User["👤 User"] -->|Commands| App["🖥️ app.py CLI"]
+    App -->|Manages| Agent["🤖 MCPAgent"]
+    Agent -->|Reasoning| LLM["🧠 Groq Llama-3.3"]
+    Agent -->|Tool Execution| Client["🔌 MCPClient"]
+    Client -->|Loads Servers| Config["🌐 browser_mcp.json"]
     
     subgraph "External MCP Servers"
-        Config -->|Orchestrates| PW[🌐 Playwright]
-        Config -->|Orchestrates| AB[🏠 Airbnb]
-        Config -->|Orchestrates| DDG[🔍 DuckDuckGo]
-        Config -->|Orchestrates| GA[⚙️ groq-agent (server.py)]
+        Config -->|Orchestrates| PW["🌐 Playwright"]
+        Config -->|Orchestrates| AB["🏠 Airbnb"]
+        Config -->|Orchestrates| DDG["🔍 DuckDuckGo"]
+        Config -->|Orchestrates| GA["⚙️ groq-agent (server.py)"]
     end
 ```
 
