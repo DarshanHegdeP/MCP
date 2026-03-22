@@ -6,25 +6,54 @@ A state-of-the-art demonstration of the **Model Context Protocol (MCP)**, featur
 
 ## 🏗️ Architecture Overview
 
-The project is structured into three distinct regions: the **MCP Host (App)**, the **Registry**, and the **MCP Servers (Processes)**.
+The system operates in two modes: an interactive **CLI Agent** and a standalone **MCP Server**. Both modes utilize the same core logic but differ in their entry points and orchestration.
+
+### 1. CLI Agent Flow (`app.py`)
+
+In this mode, the user interacts directly with a terminal-based agent.
 
 ```mermaid
 graph TD
-    subgraph "MCP Host (Application Space)"
-        User["👤 User"] -->|Interacts| App["🖥️ app.py / CLI"]
-        App -->|Manages| Agent["🤖 MCPAgent"]
-        Agent -->|Reasons with| LLM["🧠 Groq Llama-3.3"]
-        App -->|Initializes| Client["🔌 MCP Client"]
-        Agent -->|Calls Tools via| Client
+    subgraph "MCP Host Region (Application Space)"
+        User["👤 User"] -->|Inputs| App["🖥️ app.py / CLI"]
+        App -->|Initializes| Agent["🤖 MCPAgent"]
+        Agent -->|Reasons with| LLM["🧠 Groq LLM"]
+        Agent -->|Instantiates| Client["🔌 MCP Client"]
     end
 
-    Client -.->|Reads Registry| Config["📄 browser_mcp.json"]
+    subgraph "Registry Region"
+        Client -.->|Reads Registry Config| Config["📄 browser_mcp.json"]
+    end
 
-    subgraph "MCP Servers (Runtime Processes)"
-        Client -->|Connects| PW["🌐 Playwright"]
-        Client -->|Connects| AB["🏠 Airbnb"]
-        Client -->|Connects| DDG["🔍 DuckDuckGo"]
-        Client -->|Connects| GA["⚙️ groq-agent (server.py)"]
+    subgraph "MCP Server Region (Child Processes)"
+        Client -->|Connects To| PW["🌐 Playwright"]
+        Client -->|Connects To| AB["🏠 Airbnb"]
+        Client -->|Connects To| GA["⚙️ server.py (FastMCP)"]
+    end
+```
+
+### 2. Prompting/Server Flow (`server.py`)
+
+In this mode, the project acts as an MCP server itself, exposing a `run_task` tool to external clients.
+
+```mermaid
+graph TD
+    subgraph "External Region"
+        Ext["🌐 External MCP Client"] -->|Calls 'run_task'| GA["⚙️ server.py (FastMCP)"]
+    end
+
+    subgraph "MCP Host Region"
+        GA -->|Initializes| Agent["🤖 MCPAgent"]
+        Agent -->|Instantiates| Client["🔌 MCP Client"]
+    end
+
+    subgraph "Registry Region"
+        Client -.->|Reads Config| Config["📄 browser_mcp.json"]
+    end
+
+    subgraph "Secondary MCP Server Region"
+        Client -->|Delegates To| PW["🌐 Playwright"]
+        Client -->|Delegates To| AB["🏠 Airbnb"]
     end
 ```
 
@@ -80,6 +109,10 @@ python server.py
 ## 📖 Implementation Notes
 The ecosystem is built on the `mcp_use` library, bridging LangChain components with the Model Context Protocol. The `MCPAgent` is configured with safety rails like `max_steps` to prevent infinite loops during autonomous execution.
 
+
+---
+
+*Note: The previous `mcp.json` was detected as missing or redundant; all core configuration is now consolidated in `browser_mcp.json`.*
 
 ---
 
