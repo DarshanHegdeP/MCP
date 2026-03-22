@@ -1,0 +1,8 @@
+{
+    "github.copilot.codemod.executionContext":{
+        "mcp":{
+            "enabled": true,
+            "configPath":"./browser_mcp.json"
+        }
+    }
+}
