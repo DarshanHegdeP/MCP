@@ -6,21 +6,21 @@ A state-of-the-art demonstration of the **Model Context Protocol (MCP)**, featur
 
 ## 🏗️ Architecture Overview
 
-The system is designed as a modular ecosystem where a central agent coordinates multiple specialized MCP servers to execute complex, multi-stage tasks.
+The system is designed as a modular ecosystem where the **MCPAgent** acts as the central orchestrator, managing several specialized MCP servers.
 
 ```mermaid
 graph TD
-    User["👤 User"] -->|Commands| App["🖥️ app.py CLI"]
+    User["👤 User"] -->|Interacts| App["🖥️ app.py CLI"]
     App -->|Manages| Agent["🤖 MCPAgent"]
-    Agent -->|Reasoning| LLM["🧠 Groq Llama-3.3"]
-    Agent -->|Tool Execution| Client["🔌 MCPClient"]
-    Client -->|Loads Servers| Config["🌐 browser_mcp.json"]
+    Agent -->|Reasons with| LLM["🧠 Groq Llama-3.3"]
+    Agent -->|Orchestrates Tools| Client["🔌 MCPClient"]
+    Client -.->|Reads Registry| Config["📄 browser_mcp.json"]
     
     subgraph "External MCP Servers"
-        Config -->|Orchestrates| PW["🌐 Playwright"]
-        Config -->|Orchestrates| AB["🏠 Airbnb"]
-        Config -->|Orchestrates| DDG["🔍 DuckDuckGo"]
-        Config -->|Orchestrates| GA["⚙️ groq-agent (server.py)"]
+        Client -->|Spawns/Connects| PW["🌐 Playwright"]
+        Client -->|Spawns/Connects| AB["🏠 Airbnb"]
+        Client -->|Spawns/Connects| DDG["🔍 DuckDuckGo"]
+        Client -->|Spawns/Connects| GA["⚙️ groq-agent (server.py)"]
     end
 ```
 
