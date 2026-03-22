@@ -43,7 +43,6 @@ graph TD
         PW["🌐 Playwright MCP Server"]:::red
         AB["🏠 Airbnb MCP Server"]:::red
         DDG["🔍 DuckDuckGo MCP Server"]:::red
-        GA["⚙️ groq-agent (server.py)"]:::red
     end
 
     subgraph ToolsBox ["🟩 Tools Layer"]
@@ -57,7 +56,6 @@ graph TD
     Client --> PW
     Client --> AB
     Client --> DDG
-    Client --> GA
     PW --> Tools
     AB --> Tools
     DDG --> Tools
