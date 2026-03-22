@@ -1,8 +1,6 @@
-<p align="center">
-  <img src="file:///C:/Users/darsh/.gemini/antigravity/brain/db098efe-a159-47fc-8679-5999efad945d/mcp_agent_logo_1774187743048.png" width="200" alt="MCP Agent Logo">
-</p>
-
 # 🚀 MCP Agent & Server Ecosystem
+
+![MCP Agent Logo](assets/logo.png)
 
 A state-of-the-art demonstration of the **Model Context Protocol (MCP)**, featuring autonomous agents, browser automation, and multi-server orchestration. This ecosystem leverage's Groq's high-performance inference to provide a seamless agentic experience.
 
@@ -80,7 +78,7 @@ python server.py
 ## 📖 Implementation Notes
 The ecosystem is built on the `mcp_use` library, bridging LangChain components with the Model Context Protocol. The `MCPAgent` is configured with safety rails like `max_steps` to prevent infinite loops during autonomous execution.
 
-*Note: The previous `mcp.json` was detected as missing or redundant; all core configuration is now consolidated in `browser_mcp.json`.*
 
 ---
-<p align="center">Made with ❤️ for the MCP Community</p>
+
+Made with ❤️ for the MCP Community
